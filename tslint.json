@@ -1,0 +1,9 @@
+{
+    "lintOptions": {
+        "typeCheck": true
+    },
+    "rules": {
+        "newline-before-return": true,
+        "quotemark": "double"
+    }
+}

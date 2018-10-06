@@ -1,4 +1,5 @@
 import * as program from "commander";
+import read from "./read";
 
 let fileName: string = null;
 
@@ -8,4 +9,6 @@ program
   .action((file: string) => (fileName = file))
   .parse(process.argv);
 
-console.log(`will run ${fileName}`);
+console.info(`reading from ${fileName}...`)
+
+read(fileName); 
