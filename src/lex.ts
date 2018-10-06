@@ -1,6 +1,8 @@
 import * as os from "os";
-import { Node, NodeType } from "./utils/Node";
+import { TokenType } from "./utils/IToken";
+import Token from "./models/Token";
 
+// Normalise and tokenize raw code
 export default function (input: string) {
     let tokens = input
         .trim()

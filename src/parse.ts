@@ -1,5 +1,7 @@
-import { Node, NodeType } from "./utils/Node";
+import Node from "./models/Node";
+import Token from "./models/Token";
 
-export default function (token: string) {
+// Parse tokens and group them into Nodes 
+export default function (tokens: Token[]) {
 
 }
