@@ -1,6 +1,5 @@
 import * as os from "os";
-import { TokenType } from "./utils/IToken";
-import Token from "./models/Token";
+import Parse from "./Parse";
 
 // Normalise and tokenize raw code
 export default function (input: string) {
@@ -9,5 +8,5 @@ export default function (input: string) {
         .split(os.EOL)
         .filter(tkn => tkn != "")
         .map(tkn => tkn.trim());
-    console.log(tokens);
+    Parse(tokens);
 }

@@ -1,7 +1,7 @@
 import * as program from "commander";
 import Read from "./Read";
 
-let fileName: string = null;
+let fileName: string = '';
 
 program
   .version("0.1.0", "-v, --version")

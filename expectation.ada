@@ -1,4 +1,4 @@
-Init -> kickoff {
+﻿Init -> kickoff {
     var challenges = "{}";
     Save {
         "[]" as answers, 
@@ -33,7 +33,7 @@ Node moveOn -> end {
     Say "Okay.";
 };
 
-End end {
+End -> end {
     var challenges = "{}";
     var temp, answers, start_time, hints_asked;
     Save {

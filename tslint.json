@@ -4,6 +4,6 @@
     },
     "rules": {
         "newline-before-return": true,
-        "quotemark": "double"
+        "quotemark": true
     }
 }
