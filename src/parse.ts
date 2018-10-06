@@ -31,11 +31,19 @@ export default function (tokens: string[]) {
 
 function matchNode(tkn: string): Node {
     if (tkn.match(Regex.NODE)) {
-        let node: Node = new Node("root");
-        if (tkn.match(Regex.NODE_PARAMS_0)) {
-            const params = tkn.match(Regex.NODE_PARAMS_0);
+        let node: Node = new Node("");
+        if (tkn.match(Regex.ROOT_NODE)) {
+            const params = tkn.match(Regex.ROOT_NODE);
+            node.name = "root";
+            node.next = params[1];
+        } else if (tkn.match(Regex.NODE_PARAMS)) {
+            const params = tkn.match(Regex.NODE_PARAMS);
             node.name = params[1];
             node.next = params[2];
+        } else if (tkn.match(Regex.END_NODE)) {
+            const params = tkn.match(Regex.END_NODE);
+            node.name = "end";
+            node.next = "dot";
         }
 
         return node;
