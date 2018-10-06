@@ -7,6 +7,7 @@ export default function (input: string) {
     let tokens = input
         .trim()
         .split(os.EOL)
-        .filter(tkn => tkn != "");
+        .filter(tkn => tkn != "")
+        .map(tkn => tkn.trim());
     console.log(tokens);
 }
