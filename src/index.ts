@@ -1,5 +1,5 @@
 import * as program from "commander";
-import read from "./Read";
+import Read from "./Read";
 
 let fileName: string = null;
 
@@ -11,4 +11,4 @@ program
 
 console.info(`reading from ${fileName}...`)
 
-read(fileName); 
+Read(fileName); 
