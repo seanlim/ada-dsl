@@ -1,5 +1,5 @@
 import * as program from "commander";
-import read from "./read";
+import read from "./Read";
 
 let fileName: string = null;
 

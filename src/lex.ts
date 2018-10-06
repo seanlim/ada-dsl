@@ -1,13 +1,6 @@
+import * as os from "os";
 import { Node, NodeType } from "./utils/Node";
 
-export function tokenize(input: string): string[] {
-
-}
-
-export function nodes(input: string[]): Node[] {
-
-}
-
-export function body(input: Node): string[] {
-
+export default function (input: string): string[] {
+    return input.trim().split(os.EOL);
 }
