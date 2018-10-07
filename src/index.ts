@@ -1,7 +1,7 @@
 import * as program from "commander";
 import Read from "./Read";
 
-let fileName: string = '';
+let fileName: string = "";
 
 program
   .version("0.1.0", "-v, --version")
@@ -9,6 +9,6 @@ program
   .action((file: string) => (fileName = file))
   .parse(process.argv);
 
-console.info(`reading from ${fileName}...`)
+console.info(`compiling ${fileName}...`);
 
-Read(fileName); 
+Read(fileName);
