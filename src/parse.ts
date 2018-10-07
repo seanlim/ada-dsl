@@ -2,7 +2,7 @@ import Regex from "./utils/Regex";
 import Node from "./model/Node";
 import Leaf from "./model/Leaf";
 
-export default function(tokens: string[]) {
+export default function (tokens: string[]) {
   let nodes: Node[] = [];
   let counter: number = 1;
   let currNode: Node;
@@ -74,13 +74,18 @@ function parseBody(node: Node, index: number): Node {
   node.body.forEach(token => {
     const leaf = new Leaf();
     const variables = matchVars(token);
+    const method = token.match(Regex.METHOD);
+    const statement = token.match(Regex.NODE);
+
     if (variables) {
       leaf.variables = variables;
-      const method = token.match(Regex.METHOD);
-      if (method) leaf.kind = method[0].split(" ")[0];
-    } else {
-      const statement = token.match(Regex.NODE);
-      if (statement) leaf.kind = statement[0];
+    }
+    if (method) {
+      leaf.isMethod = true;
+      leaf.kind = method[0].split(" ")[0];
+    }
+    if (statement) {
+      leaf.kind = statement[0];
     }
 
     node.leafs.push(leaf);
