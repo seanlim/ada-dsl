@@ -1,13 +1,13 @@
 
 import Regex from "./utils/Regex";
 import Node from "./model/Node";
-import regex from "./utils/Regex";
 
 export default function (tokens: string[]) {
-    // Map nodes
     let nodes: Node[] = [];
     let counter: number = 1;
     let currNode: Node;
+
+    // Parse nodes 
     tokens.forEach((token, index) => {
         if (!currNode) {
             currNode = matchNode(token); // Parse Nodes
@@ -19,7 +19,6 @@ export default function (tokens: string[]) {
             if (counter > 0) {
                 currNode.body.push(token);
             } else {
-                currNode.body = currNode.body.join("").split(";"); // Parse node body
                 nodes.push(currNode);
                 currNode = null;
                 counter = 1;
@@ -27,7 +26,13 @@ export default function (tokens: string[]) {
         }
     });
 
-    console.info(nodes.map(n => n.kind));
+    // Parse node value
+    nodes.forEach(stripValues);
+
+    // Parse node body
+    // nodes.forEach(parseBody);
+
+    console.info(nodes);
 }
 
 function matchNode(tkn: string): Node {
@@ -64,6 +69,25 @@ function matchNode(tkn: string): Node {
     }
 
     return null;
+}
+
+function parseBody(node: Node, index: number): Node {
+
+    return node;
+}
+
+function stripValues(node: Node): Node {
+    let rawBody = node.body.join("");
+
+    node.values = rawBody
+        .match(Regex.VALUES);
+
+    node.body = rawBody
+        .replace(Regex.VALUES, "__##VAL##__")
+        .split(";")
+        .filter(x => x != "");
+
+    return node;
 }
 
 

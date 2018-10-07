@@ -35,9 +35,7 @@ Node moveOn -> end {
 
 End -> end {
     Using challenges, temp, answers, start_time, hints_asked, Save {
-        challenges: {
-
-        },
+        challenges: "",
         end_time: "Date.now()"
     };
 };
