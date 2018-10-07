@@ -1,8 +1,8 @@
 ﻿Init -> kickoff {
-    var challenges = "{}";
-    Save {
-        "[]" as answers, 
-        "Date.now()" as "start_time"
+    Using challenges, Save {
+        answers: "[]",
+        start_time: "Date.now()",
+        challenges: "{}"
     };
 };
 
@@ -14,7 +14,7 @@ Node kickoff -> quickreplies {
 };
 
 Choices quickreplies -> moveOn {
-    tries = 2;
+    Allow 2;
     Choice opt1 as "0 -2" -> givehint;
     Choice opt2 as "0 -3" -> givehint;
     Choice opt3 as "2 -1" -> givehint;
@@ -34,10 +34,11 @@ Node moveOn -> end {
 };
 
 End -> end {
-    var challenges = "{}";
-    var temp, answers, start_time, hints_asked;
-    Save {
-        
+    Using challenges, temp, answers, start_time, hints_asked, Save {
+        challenges: {
+
+        },
+        end_time: "Date.now()"
     };
 };
 
