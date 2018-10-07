@@ -1,5 +1,6 @@
 import Regex from "./utils/Regex";
 import Node from "./model/Node";
+import Leaf from "./model/Leaf";
 
 export default function(tokens: string[]) {
   let nodes: Node[] = [];
@@ -30,7 +31,7 @@ export default function(tokens: string[]) {
   // Parse node body
   nodes.forEach(parseBody);
 
-  console.info(nodes);
+  console.info(nodes.map(n => n.leafs));
 }
 
 function matchNode(tkn: string): Node {
@@ -71,12 +72,18 @@ function matchNode(tkn: string): Node {
 
 function parseBody(node: Node, index: number): Node {
   node.body.forEach(token => {
+    const leaf = new Leaf();
     const variables = matchVars(token);
-    const newNode = new Node("");
     if (variables) {
-      newNode.variables = variables;
+      leaf.variables = variables;
+      const method = token.match(Regex.METHOD);
+      if (method) leaf.kind = method[0].split(" ")[0];
+    } else {
+      const statement = token.match(Regex.NODE);
+      if (statement) leaf.kind = statement[0];
     }
-    node.nodes.push(newNode);
+
+    node.leafs.push(leaf);
   });
 
   return node;

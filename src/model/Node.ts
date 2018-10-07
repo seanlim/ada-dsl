@@ -1,3 +1,5 @@
+import Leaf from "./Leaf";
+
 export default class Node {
   kind: string;
   name: string;
@@ -5,7 +7,7 @@ export default class Node {
   variables: string[];
   values: string[] = [];
   body: string[] = [];
-  nodes: Node[] = [];
+  leafs: Leaf[] = [];
   constructor(n: string) {
     this.name = n;
   }
