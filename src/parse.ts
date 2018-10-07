@@ -80,10 +80,10 @@ function stripValues(node: Node): Node {
     let rawBody = node.body.join("");
 
     node.values = rawBody
-        .match(Regex.VALUES);
+        .match(Regex.VALUE);
 
     node.body = rawBody
-        .replace(Regex.VALUES, "__##VAL##__")
+        .replace(Regex.VALUE, "__##VAL##__")
         .split(";")
         .filter(x => x != "");
 
