@@ -9,6 +9,6 @@ program
   .action((file: string) => (fileName = file))
   .parse(process.argv);
 
-console.info(`compiling ${fileName}...`);
+console.info(`interpreting ${fileName}...`);
 
 Read(fileName);
