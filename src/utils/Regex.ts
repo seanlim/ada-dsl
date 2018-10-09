@@ -11,6 +11,6 @@ export default {
   BODY_OPEN: /{(?=(?:[^"]*"[^"]*")*[^"]*$)/,
   BODY_CLOSE: /(?=(?:[^"]*"[^"]*")*[^"]*$)}/,
   VALUE: /"(.*?)"/g,
-  VARIABLE: /Using( ([a-zA-z]+),)+ /g,
+  VARIABLE: /Using /g,
   METHOD: /\b[A-Z]+[a-z]+\b(?=(?:[^"]*"[^"]*")*[^"]*$) {/g
 };

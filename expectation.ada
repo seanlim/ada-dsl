@@ -1,5 +1,6 @@
 ﻿Init -> kickoff {
-    Using challenges, Save {
+    Using challenges; 
+    Save {
         answers: "[]",
         start_time: "Date.now()",
         challenges: "{}"
@@ -34,7 +35,8 @@ Node moveOn -> end {
 };
 
 End -> end {
-    Using challenges, temp, answers, start_time, hints_asked, Save {
+    Using challenges, temp, answers, start_time, hints_asked;
+    Save {
         challenges: "",
         end_time: "Date.now()"
     };

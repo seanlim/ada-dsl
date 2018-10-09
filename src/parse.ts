@@ -3,6 +3,7 @@ import Node from "./model/Node";
 import Leaf from "./model/Leaf";
 
 import Interpret from "./Interpret";
+import { spawn } from "child_process";
 
 export default function(tokens: string[]) {
   let nodes: Node[] = [];
@@ -73,8 +74,8 @@ function matchNode(tkn: string): Node {
 }
 
 function parseBody(node: Node, index: number): Node {
-  node.body.forEach(token => {
-    const leaf = new Leaf();
+  node.body.forEach((token, index) => {
+    let leaf = new Leaf();
     const variables = matchVars(token);
     const method = token.match(Regex.METHOD);
     const statement = token.match(Regex.NODE);
@@ -90,10 +91,34 @@ function parseBody(node: Node, index: number): Node {
       leaf.kind = statement[0];
     }
 
+    leaf = parseLeaf(leaf, index, node);
     node.leafs.push(leaf);
   });
 
   return node;
+}
+
+function parseLeaf(leaf: Leaf, index: number, node: Node): Leaf {
+  if (leaf.kind === "Save") {
+    let values = node.body[index]
+      .split("{")[1]
+      .split("}")[0]
+      .split(",")
+      .map(x => [x.split(":")[0].trim(), x.split(":")[1].trim()]);
+    // Pour values
+    values.forEach((x, i) => {
+      if (x[1] === "__##VAL##__") x[1] = node.values[i];
+      leaf.params = {
+        ...leaf.params,
+        [x[0]]: x[1]
+      };
+    });
+
+    if (node.leafs[index - 1].kind === "Using")
+      leaf.variables = node.leafs[index - 1].variables;
+  }
+
+  return leaf;
 }
 
 function stripValues(node: Node): Node {
@@ -110,13 +135,11 @@ function stripValues(node: Node): Node {
 }
 
 function matchVars(token: string): string[] {
-  const matchVars = token.match(Regex.VARIABLE);
-  if (matchVars) {
-    return matchVars[0]
-      .replace("Using ", "")
+  if (token.match(Regex.VARIABLE)) {
+    return token
+      .split("Using")[1]
       .split(",")
-      .map(s => s.trim())
-      .filter(s => s != "");
+      .map(t => t.trim());
   }
 
   return null;

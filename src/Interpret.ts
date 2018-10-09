@@ -1,22 +1,41 @@
 import Node from "./model/Node";
 import * as fs from "fs";
+import Leaf from "./model/Leaf";
 
 export default function(nodes: Node[]) {
-  console.info(nodes);
-
   let temp: Object = {
     nodes: nodes.map(interpretNode),
     key: nodes.filter(n => n.kind === "ROOT_NODE")[0].name
   };
 
   fs.writeFile("out.json", JSON.stringify(temp, null, 2), err =>
-    console.log(err)
+    console.log(err || "")
   );
 }
 
 function interpretNode(node: Node): Object {
-  return {
+  let base: Object = {
     key: node.name,
     next: node.next
+  };
+
+  node.leafs.forEach(leaf => {
+    if (leaf.kind === "Save") {
+      base = {
+        ...base,
+        ...saveAs(leaf)
+      };
+    }
+  });
+
+  return base;
+}
+
+function saveAs(leaf: Leaf): Object {
+  return {
+    saveAs: {
+      mapping: leaf.params,
+      variables: leaf.variables
+    }
   };
 }
