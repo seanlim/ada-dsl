@@ -2,7 +2,9 @@ import Regex from "./utils/Regex";
 import Node from "./model/Node";
 import Leaf from "./model/Leaf";
 
-export default function (tokens: string[]) {
+import Interpret from "./Interpret";
+
+export default function(tokens: string[]) {
   let nodes: Node[] = [];
   let counter: number = 1;
   let currNode: Node;
@@ -31,7 +33,7 @@ export default function (tokens: string[]) {
   // Parse node body
   nodes.forEach(parseBody);
 
-  console.info(nodes.map(n => n.leafs));
+  Interpret(nodes);
 }
 
 function matchNode(tkn: string): Node {
