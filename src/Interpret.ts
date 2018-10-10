@@ -25,6 +25,11 @@ function interpretNode(node: Node): Object {
         ...base,
         ...saveAs(leaf)
       };
+    } else if (leaf.kind === "Say") {
+      base = {
+        ...base,
+        ...say(leaf)
+      };
     }
   });
 
@@ -37,5 +42,11 @@ function saveAs(leaf: Leaf): Object {
       mapping: leaf.params,
       variables: leaf.variables
     }
+  };
+}
+
+function say(leaf: Leaf): Object {
+  return {
+    ...leaf.params
   };
 }

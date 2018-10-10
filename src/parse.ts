@@ -116,6 +116,21 @@ function parseLeaf(leaf: Leaf, index: number, node: Node): Leaf {
 
     if (node.leafs[index - 1].kind === "Using")
       leaf.variables = node.leafs[index - 1].variables;
+  } else if (leaf.kind === "Say") {
+    if (leaf.isMethod) {
+      let values = node.body[index]
+        .split("{")[1]
+        .split("}")[0]
+        .split(",")
+        .map((v, i) => (v === "__##VAL##__" ? node.values[i] : v));
+      leaf.params = {
+        text: values
+      };
+    } else {
+      leaf.params = {
+        text: node.values[0]
+      };
+    }
   }
 
   return leaf;

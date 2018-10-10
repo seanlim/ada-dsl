@@ -10,7 +10,7 @@
 Node kickoff -> quickreplies {
     Say {
         "What will the following code output?",
-		"import java.util.*; \n\npublic class VLA2 implements Comparator<VLA2> { \n    int dishSize; \n\n    public static void main(String[] args) { \n        VLA2[] va = {new VLA2(40), new VLA2(200), new VLA2(60)}; \n        Arrays.sort(va, va[0]); \n        int index = Arrays.binarySearch(va, new VLA2(40), va[0]); \n        System.out.print(index + \" \"); \n        index = Arrays.binarySearch(va, new VLA2(80), va[0]); \n        System.out.print(index); \n    } \n    \n    public int compare(VLA2 a, VLA2 b) { \n        return b.dishSize - a.dishSize;\n    }\n    \n    VLA2(int d) { dishSize = d; } \n}"
+		"Code goes here"
     };
 };
 
